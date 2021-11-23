@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.3.3",
+    "@rarible/royalties": "^0.7.2",
     "cucumber": "^7.0.0-rc.0"
   }
 }
