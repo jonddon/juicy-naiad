@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-import "../royalties/contracts/LibPart.sol";
+pragma solidity 0.8.0;
+import "../LibPart.sol";
 abstract contract AbstractRoyalties {
     mapping (uint256 => LibPart.Part[]) public royalties;
 function _saveRoyalties(uint256 _id, LibPart.Part[] memory _royalties) internal {

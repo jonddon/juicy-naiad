@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity 0.8.0;
 import "./AbstractRoyalties.sol";
-import "../royalties/contracts/RoyaltiesV2.sol";
+import "../RoyaltiesV2.sol";
 contract RoyaltiesV2Impl is AbstractRoyalties, RoyaltiesV2 {
     
     function getRaribleV2Royalties(uint256 id) override external view returns (LibPart.Part[] memory) {

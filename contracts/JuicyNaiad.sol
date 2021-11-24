@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.0;
+pragma solidity 0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -20,6 +20,7 @@ contract JuicyNaiad is ERC721Enumerable, Ownable, RoyaltiesV2Impl  {
   bool public paused = false;
   bool public revealed = false;
   string public notRevealedUri;
+  mapping(address => bool) whitelisted;
 
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIdTracker;
@@ -28,8 +29,8 @@ contract JuicyNaiad is ERC721Enumerable, Ownable, RoyaltiesV2Impl  {
   bytes4 private constant _INTERFACE_ID_ERC2981 = 0x2a55205a;
 
   //Royalty owner address
-  address public constant artistAddress = 0x0x0x0x0x0x0x0x0x0x0x0x0x0;
-    constructor() ERC721("JuicyNaiad", "JND"){
+  address public constant artistAddress = 0xf3673004F3b1C77271a3581244d2B69Df13346f1;
+    constructor(string memory _initBaseURI) ERC721("JuicyNaiad", "JND"){
         setBaseURI(_initBaseURI);
         // setNotRevealedURI(_initNotRevealedUri);
         mint(msg.sender, 10000);
@@ -157,6 +158,8 @@ contract JuicyNaiad is ERC721Enumerable, Ownable, RoyaltiesV2Impl  {
         _royalties[0].account = _royaltiesReceipientAddress;
         _saveRoyalties(_tokenId, _royalties);
     }
+
+    //interface to Check if the marketplace supports royalty
   function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721) returns (bool) {
         if(interfaceId == LibRoyaltiesV2._INTERFACE_ID_ROYALTIES) {
             return true;
